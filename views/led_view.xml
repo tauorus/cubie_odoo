@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <form>
               <group>
-                <field name="fecha"/>
+                <field name="nombre"/>
                 <field name="state" readonly="1"/>
                 <button name="action_prender" type="object"
                         string="Prender" states="apagado" class="oe_highlight"/>
@@ -22,7 +22,7 @@
         <field name="model">cubie_odoo.led</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="fecha"/>
+                <field name="nombre"/>
                 <field name="state"/>
             </tree>
         </field>

@@ -11,7 +11,7 @@ class cubie_odoo_led(models.Model):
 
     led_pin = 17
 
-    fecha = fields.Date('Fecha')
+    nombre = fields.Char('nombre',size=256)
     state = fields.Selection(
         [('prendido','Prendido'),('apagado','Apagado')],
         default='apagado',
@@ -22,19 +22,19 @@ class cubie_odoo_led(models.Model):
 
     @api.model
     def create(self, values):
-        export_= '/sys/class/gpio/export'
-        _cwd = '/sys/class/gpio'
-        res = call('echo {} > /sys/class/gpio/export'.format(self.led_pin), shell=True)
+#         export_= '/sys/class/gpio/export'
+#         _cwd = '/sys/class/gpio'
+        call('echo {} > /sys/class/gpio/export'.format(self.led_pin), shell=True)
         # Tambien se puede leer la salida con check_output('echo {} > /sys/class/gpio/export'.format(self.led_pin), shell=True)
-        if res == 1:
-            print('Hubo un problema habilitando el pin.')
+#         if res == 1:
+#             print('Hubo un problema habilitando el pin.')
 #         try:
 #             subprocess.check_output(['echo', self.led_pin, '>', export_], stderr=subprocess.STDOUT, cwd=_cwd)
 #         except:
 #             print('Hubo un problema habilitando el pin.')
-        res = call('echo out > /sys/class/gpio/gpio{}_pg*/direction'.format(self.led_pin), shell=True)
-        if res == 1:
-            raise exceptions.Warning('Hubo un problema configurando el pin como salida.')
+        call('echo out > /sys/class/gpio/gpio{}_pg*/direction'.format(self.led_pin), shell=True)
+#         if res == 1:
+#             raise exceptions.Warning('Hubo un problema configurando el pin como salida.')
 #         try:
 #             subprocess.check_output(['echo', 'out', '>', 'gpio{}_pg*/direction'.format(self.led_pin)], stderr=subprocess.STDOUT, cwd=_cwd)
 #         except:
@@ -47,12 +47,12 @@ class cubie_odoo_led(models.Model):
     @api.one
     def action_prender(self):
         self.state = 'prendido'
-        self.date = date.today()
+#         self.date = date.today()
 #         wiringpi2.digitalWrite(self.led_pin,1) # Write 1 HIGH to pin 2
-        _cwd = '/sys/class/gpio'
-        res = call('echo 1 > /sys/class/gpio/gpio17_pg9/value', shell=True)
-        if res == 1:
-            print('Hubo un problema prendiendo el LED.')
+#         _cwd = '/sys/class/gpio'
+        call('echo 1 > /sys/class/gpio/gpio{}_pg*/value'.format(self.led_pin), shell=True)
+#         if res == 1:
+#             print('Hubo un problema prendiendo el LED.')
 #         try:
 #             subprocess.check_output(['echo', '1', '>', 'gpio{}_pg*/value'.format(led_pin)], stderr=subprocess.STDOUT, cwd=_cwd)
 #         except:
@@ -64,12 +64,12 @@ class cubie_odoo_led(models.Model):
     @api.one
     def action_apagar(self):
         self.state = 'apagado'
-        self.date = date.today()
+#         self.date = date.today()
 #         wiringpi2.digitalWrite(self.led_pin,0) # Write 0 to pin 17
-        _cwd = '/sys/class/gpio'
-        res = call('echo 0 > /sys/class/gpio/gpio17_pg9/value', shell=True)
-        if res == 1:
-            print('Hubo un problema apagando el LED.')
+#         _cwd = '/sys/class/gpio'
+        call('echo 0 > /sys/class/gpio/gpio{}_pg*/value'.format(self.led_pin), shell=True)
+#         if res == 1:
+#             print('Hubo un problema apagando el LED.')
 #         try:
 #             subprocess.check_output(['echo', '0', '>', 'gpio{}_pg*/value'.format(led_pin)], stderr=subprocess.STDOUT, cwd=_cwd)
 #         except:
