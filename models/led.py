@@ -6,7 +6,7 @@ import subprocess
 from subprocess import CalledProcessError
 
 
-class led(models.Model):
+class cubie_odoo_led(models.Model):
     _name = "cubie_odoo.led"
 
     led_pin = 17
@@ -25,16 +25,16 @@ class led(models.Model):
         export_= '/sys/class/gpio/export'
         _cwd = '/sys/class/gpio'
         try:
-            subprocess.check_output(['echo', led_pin, '>', fexport_], stderr=subprocess.STDOUT, cwd=_cwd)
+            subprocess.check_output(['echo', self.led_pin, '>', export_], stderr=subprocess.STDOUT, cwd=_cwd)
         except:
             print('Hubo un problema habilitando el pin.')
         try:
-            subprocess.check_output(['echo', 'out', '>', 'gpio{}_pg*/direction'.format(led_pin)], stderr=subprocess.STDOUT, cwd=_cwd)
+            subprocess.check_output(['echo', 'out', '>', 'gpio{}_pg*/direction'.format(self.led_pin)], stderr=subprocess.STDOUT, cwd=_cwd)
         except:
             raise exceptions.Warning('Hubo un problema configurando el pin como salida.')
 #         wiringpi2.wiringPiSetupPhys() # init pin to phy mode,U14(1~48) U15(49~96)
 #         wiringpi2.pinMode(self.led_pin,1) # set pin 17 to output mode 1
-        return super(led, self).create(values)
+        return super(cubie_odoo_led, self).create(values)
 
 
     @api.one
