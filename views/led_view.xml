@@ -9,9 +9,9 @@
               <group>
                 <field name="fecha"/>
                 <field name="state" readonly="1"/>
-                <button name="action_aprobar" type="object"
+                <button name="action_prender" type="object"
                         string="Prender" states="apagado" class="oe_highlight"/>
-                <button name="action_cancelar" type="object"
+                <button name="action_apagar" type="object"
                         string="Apagar" states="prendido" class="oe_highlight"/>
               </group>
             </form>
