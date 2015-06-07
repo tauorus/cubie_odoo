@@ -8,11 +8,11 @@
             <form>
               <group>
                 <field name="fecha"/>
-                <field name="estado"/>
+                <field name="state"/>
                 <button name="action_aprobar" type="object"
-                        string="Prender" estado="apagado" class="oe_highlight"/>
+                        string="Prender" states="apagado" class="oe_highlight"/>
                 <button name="action_cancelar" type="object"
-                        string="Apagar" estado="prendido" class="oe_highlight"/>
+                        string="Apagar" states="prendido" class="oe_highlight"/>
               </group>
             </form>
       </field>
@@ -23,7 +23,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="fecha"/>
-                <field name="estado"/>
+                <field name="state"/>
             </tree>
         </field>
     </record>

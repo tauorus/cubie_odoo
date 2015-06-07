@@ -10,7 +10,7 @@ class led(models.Model):
     led_pin = 17
 
     fecha = fields.Date('Fecha')
-    estado = fields.Selection(
+    state = fields.Selection(
         [('prendido','Prendido'),('apagado','Apagado')],
         default='apagado',
         string = 'Estado',
@@ -27,7 +27,7 @@ class led(models.Model):
 
     @api.one
     def action_prender(self):
-        self.estado = 'prendido'
+        self.state = 'prendido'
         self.date = date.today()
         wiringpi2.digitalWrite(self.led_pin,1) # Write 1 HIGH to pin 2
         if wiringpi2.digitalRead(self.led_pin) != 1:
@@ -36,7 +36,7 @@ class led(models.Model):
 
     @api.one
     def action_apagar(self):
-        self.estado = 'apagado'
+        self.state = 'apagado'
         self.date = date.today()
         wiringpi2.digitalWrite(self.led_pin,0) # Write 0 to pin 17
         if wiringpi2.digitalRead(self.led_pin) != 0:
