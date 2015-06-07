@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="led_view_form">
+        <field name="model">cubie_odoo.led</field>
+        <field name="arch" type="xml">
+            <form>
+              <group>
+                <field name="fecha"/>
+                <field name="estado"/>
+                <button name="action_aprobar" type="object"
+                        string="Prender" estado="apagado" class="oe_highlight"/>
+                <button name="action_cancelar" type="object"
+                        string="Apagar" estado="prendido" class="oe_highlight"/>
+              </group>
+            </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="led_view_tree">
+        <field name="model">cubie_odoo.led</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="fecha"/>
+                <field name="estado"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="led_view_action">
+        <field name="name">LED</field>
+        <field name="res_model">cubie_odoo.led</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_root" name="Cubie Odoo"/>
+    <menuitem id="menu_cubie_odoo" name="LED" parent="menu_root"/>
+    <menuitem id="menu_cubie_odoo_led" parent="menu_cubie_odoo" name="Led" action="led_view_action"/>
+</data>
+</openerp>
