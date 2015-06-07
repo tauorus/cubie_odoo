@@ -16,7 +16,7 @@ class led(models.Model):
         [('prendido','Prendido'),('apagado','Apagado')],
         default='apagado',
         string = 'Estado',
-        required=True,
+        readonly=True,
     )
 
 
