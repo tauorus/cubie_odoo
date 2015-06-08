@@ -6,6 +6,7 @@
         <field name="model">cubie_odoo.led</field>
         <field name="arch" type="xml">
             <form>
+            <sheet>
               <group>
                 <field name="nombre"/>
                 <field name="state" readonly="1"/>
@@ -14,6 +15,7 @@
                 <button name="action_apagar" type="object"
                         string="Apagar" states="prendido" class="oe_highlight"/>
               </group>
+            </sheet>
             </form>
       </field>
     </record>
