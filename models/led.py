@@ -36,7 +36,7 @@ class cubie_odoo_led(models.Model):
         except CalledProcessError, e:
             print 'Error {}'.format(e)
             message = 'Hubo un problema configurando el pin.'
-            raise osv.except_osv(message, str(e))
+            raise exceptions.Warning(message, str(e))
         return super(cubie_odoo_led, self).create(values)
 
 
@@ -51,7 +51,7 @@ class cubie_odoo_led(models.Model):
         except CalledProcessError, e:
             print 'Error {}'.format(e)
             message = 'Hubo un problema prendiendo el LED.'
-            raise osv.except_osv(message, str(e))
+            raise exceptions.Warning(message, str(e))
 
 
     @api.one
@@ -62,5 +62,5 @@ class cubie_odoo_led(models.Model):
         except CalledProcessError, e:
             print 'Error {}'.format(e)
             message = 'Hubo un problema apagando el LED.'
-            raise osv.except_osv(message, str(e))
+            raise exceptions.Warning(message, str(e))
 
