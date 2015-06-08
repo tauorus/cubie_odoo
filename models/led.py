@@ -27,7 +27,7 @@ class cubie_odoo_led(models.Model):
 #         Crear el enlace de configuracion del pin
         try:
             export= open('/sys/class/gpio/export','w')
-            export.write(led_pin)
+            export.write(self.led_pin)
             cerrado = False
             while(cerrado == False):
                 try:
@@ -41,7 +41,7 @@ class cubie_odoo_led(models.Model):
 
 #         Configurarlo como salida
         try:
-            path = '/sys/class/gpio/gpio' + led_pin + '_pg9/direction'
+            path = '/sys/class/gpio/gpio' + self.led_pin + '_pg9/direction'
             direction = open (path,'w')
             direction.write('out')
             cerrado = False
@@ -63,7 +63,7 @@ class cubie_odoo_led(models.Model):
     def action_prender(self):
         self.state = 'prendido'
         try:
-            path = '/sys/class/gpio/gpio' + led_pin + '_pg9/value'
+            path = '/sys/class/gpio/gpio' + self.led_pin + '_pg9/value'
             value= open (path,'w')
             value.write('1')
             cerrado = False
@@ -85,7 +85,7 @@ class cubie_odoo_led(models.Model):
     def action_apagar(self):
         self.state = 'apagado'
         try:
-            path = '/sys/class/gpio/gpio' + led_pin + '_pg9/value'
+            path = '/sys/class/gpio/gpio' + self.led_pin + '_pg9/value'
             value= open (path,'w')
             value.write('0')
             cerrado = False
