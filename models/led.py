@@ -45,7 +45,12 @@ class cubie_odoo_led(models.Model):
                     print 'Error {}'.format(e)
                     message = 'Hubo un problema habilitando el pin.'
                     raise exceptions.Warning(message, str(e))
-
+                try:
+                    subprocess.call('sudo chown -R odoo:odoo /sys/class/gpio/gpio17_pg9',shell = True)
+                except Exception as e:
+                    print 'Error {}'.format(e)
+                    message = 'Hubo un problema cambiando propietario a los archivos de configuracion del pin.'
+                    raise exceptions.Warning(message, str(e))
             #Se configura como salida el pin
             try:
                 path = '/sys/class/gpio/gpio' + pin + '_pg9/direction'
@@ -58,12 +63,6 @@ class cubie_odoo_led(models.Model):
                         cerrado = True
                     except IOError:
                         print "Aun no se puede cerrar el archivo {}".format(direction)
-                try:
-                    subprocess.call('sudo chown -R odoo:odoo /sys/class/gpio/gpio17_pg9',shell = True)
-                except Exception as e:
-                    print 'Error {}'.format(e)
-                    message = 'Hubo un problema cambiando propietario a los archivos de configuracion del pin.'
-                    raise exceptions.Warning(message, str(e))
             except Exception as e:
                 print 'Error {}'.format(e)
                 message = 'Hubo un problema configurando el pin.'
